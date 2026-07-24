@@ -1,0 +1,23 @@
+{
+  "name": "gaddev",
+  "owner": {
+    "name": "GadDev",
+    "url": "https://github.com/GadDev"
+  },
+  "description": "Agent skills for cutting through AI hype, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "gaddev-skills",
+      "source": "./",
+      "description": "Skills for evaluating AI releases without repeating launch-blog hype — release triage, news/paper digests, and a shared source-credibility rubric.",
+      "category": "research",
+      "keywords": [
+        "ai",
+        "skills",
+        "evidence-tiering",
+        "release-triage",
+        "hype-check"
+      ]
+    }
+  ]
+}
