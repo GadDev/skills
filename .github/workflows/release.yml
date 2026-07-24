@@ -33,5 +33,9 @@ jobs:
           publish: npx changeset tag
           commit: "chore: version skills"
           title: "chore: version skills"
+          # GH_TOKEN must be a PAT (classic or fine-grained with Contents + Pull Requests write).
+          # GITHUB_TOKEN is blocked by the repo-level "Allow GitHub Actions to create or
+          # approve pull requests" restriction; a PAT bypasses that limit.
+          github-token: ${{ secrets.GH_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
