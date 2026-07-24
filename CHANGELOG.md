@@ -1,5 +1,18 @@
 # gaddev-skills
 
+## 1.2.2
+
+### Patch Changes
+
+- [#6](https://github.com/GadDev/skills/pull/6) [`dd7ca0a`](https://github.com/GadDev/skills/commit/dd7ca0a91021368ae53d8631f072468a1d993049) Thanks [@GadDev](https://github.com/GadDev)! - fix: enable git tag creation for the private package
+
+  `npx changeset tag` was silently skipping tag creation because
+  `gaddev-skills` is a private package and `privatePackages.tag` wasn't set
+  in `.changeset/config.json`. This meant no git tag (and no GitHub Release)
+  was ever created after a version PR merged. Adds
+  `"privatePackages": { "version": true, "tag": true }` so versioning and
+  tagging apply to this private package as expected.
+
 ## 1.2.1
 
 ### Patch Changes
