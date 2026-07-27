@@ -1,5 +1,20 @@
 # gaddev-skills
 
+## 1.3.0
+
+### Minor Changes
+
+- [#8](https://github.com/GadDev/skills/pull/8) [`f2b9629`](https://github.com/GadDev/skills/commit/f2b96294a6ea70c217debd23659a7c54b7ad2c82) Thanks [@GadDev](https://github.com/GadDev)! - feat: add `brainstorm-to-blueprint` skill
+
+  Turns a raw feature brainstorm (typically a messy dump pasted from ChatGPT
+  or notes) into three grounded planning artifacts — a constitution, a
+  roadmap, and a techstack — without inventing scope, decisions, or
+  technology the user never stated. Treats the dump as LLM-authored source to
+  vet (hooking into `evidence-tiering`) rather than ground truth, tags every
+  unstated inference with `[ASSUMPTION — confirm]`, and writes into Spec Kit
+  (`.specify/`) or OpenSpec (`openspec/`) locations when present instead of
+  reimplementing their downstream flow.
+
 ## 1.2.2
 
 ### Patch Changes
