@@ -59,6 +59,7 @@ conversation calls for them, no slash command needed.
 | [`ai-release-triage`](skills/ai-release-triage/SKILL.md) | Evaluating one specific new model/tool/framework release — is it hype, what actually changed, is it worth adopting |
 | [`ai-pulse`](skills/ai-pulse/SKILL.md) | Broad "what's new in AI" digests and research-paper roundups — multi-item scans, not deep dives |
 | [`evidence-tiering`](skills/evidence-tiering/SKILL.md) | The shared credibility rubric both skills above call into — usable standalone any time an AI claim needs a sanity check |
+| [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | Turning a raw feature brainstorm (e.g. a ChatGPT dump) into a grounded constitution, roadmap, and techstack — without inventing scope or tech you never chose. Feeds Spec Kit / OpenSpec |
 
 ## Why these are separate skills
 
@@ -67,6 +68,25 @@ claim by source quality. `ai-release-triage` and `ai-pulse` are two
 different jobs built on top of it — one deep, one broad. Splitting them
 means the credibility logic stays consistent everywhere it's used instead
 of drifting between copies.
+
+## Release process
+
+Versioning uses [changesets](https://github.com/changesets/changesets). Every
+PR that changes a skill should include a changeset (`npx changeset`)
+describing the change and its version bump (patch/minor/major).
+
+Merging a PR with a changeset doesn't cut a release by itself — it updates
+a running `chore: version skills` PR that accumulates every pending
+changeset. Releases are **batched, not per-fix**: that PR is left open and
+merged deliberately, once enough changes have landed to justify a version
+bump, not automatically after every merge. Merging it bumps the version
+once, writes one `CHANGELOG.md` entry covering everything batched in, and
+tags a GitHub release.
+
+There's no fixed cadence — merge the version PR whenever the batch feels
+release-worthy (a handful of related fixes, a new skill, a security fix
+that shouldn't wait). A single urgent fix is a valid reason to merge it
+immediately rather than wait for a batch.
 
 ## Contributing / adapting
 
