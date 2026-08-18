@@ -72,6 +72,7 @@ conversation calls for them, no slash command needed.
 | [`ai-pulse`](skills/ai-pulse/SKILL.md)                   | Broad "what's new in AI" digests and research-paper roundups — multi-item scans, not deep dives                         |
 | [`evidence-tiering`](skills/evidence-tiering/SKILL.md)   | The shared credibility rubric both skills above call into — usable standalone any time an AI claim needs a sanity check |
 | [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | Turning a raw feature brainstorm (e.g. a ChatGPT dump) into a grounded constitution, roadmap, and techstack — without inventing scope or tech you never chose. Feeds Spec Kit / OpenSpec |
+| [`design-skill`](skills/design-skill/SKILL.md) | Designing and authoring a new Claude Code skill — trigger/description design, scope, worked examples, and diagnosing skills that won't fire |
 
 ### Prompt engineering
 
