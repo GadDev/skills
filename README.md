@@ -1,187 +1,267 @@
-# skills
+# GadDev Agent Skills
 
-My agent skills, covering two areas: cutting through AI hype, and writing
-prompts that actually work — built from tracking AI models, tools, and
-agent-engineering techniques closely enough to know when a launch claim
-doesn't hold up, and from enough prompt-debugging sessions to know what
-usually goes wrong.
+[![skills.sh](https://skills.sh/b/gaddev/skills)](https://skills.sh/gaddev/skills)
+[![Validate](https://github.com/GadDev/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/GadDev/skills/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## The problems
+![Scattered notes examined through a lens and organised into planning documents](docs/assets/agent-skills-banner.png)
 
-**AI hype.** Launch blogs, demo videos, and viral threads are optimized to
-make a release look maximally impressive. Left alone, an agent will just
-repeat those claims back to you. The hype-filtering skills add a
-structured pass before that happens: rank the evidence, figure out what
-actually changed, and only then decide if it matters.
+Agent skills for evidence-backed AI research, grounded planning, prompt
+improvement, and agent skill authoring. Each skill addresses a specific
+workflow; install the ones you need.
 
-**Weak prompts.** Most prompts fail because the model can't infer what the
-user didn't write — missing context, undefined success conditions, no
-examples to anchor style. `prompt-architect` runs an analyse → improve →
-score loop instead of a one-shot rewrite, and doubles as a guardrail
-against adversarial or ill-defined prompts.
+**Have a messy feature brainstorm? Start with `brainstorm-to-blueprint`.**
+It turns existing notes into a constitution, roadmap, and techstack while
+preserving stated decisions and flagging assumptions and open choices.
 
-## Install
+## Contents
+
+- [Skill catalogue](#skill-catalogue)
+- [Installation](#installation)
+- [Examples](#examples)
+- [Requirements and compatibility](#requirements-and-compatibility)
+- [Contributing](#contributing)
+- [Releases](#releases)
+- [License](#license)
+
+## Skill catalogue
+
+| Your task | Start with |
+| --- | --- |
+| Decide whether to adopt a particular AI release | [`ai-release-triage`](skills/ai-release-triage/SKILL.md) |
+| Catch up on AI news or research across several items | [`ai-pulse`](skills/ai-pulse/SKILL.md) |
+| Check the evidence behind an AI claim | [`evidence-tiering`](skills/evidence-tiering/SKILL.md) |
+| Structure an existing brainstorm into planning artifacts | [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) |
+| Design an agent skill or diagnose why it is not loading | [`design-skill`](skills/design-skill/SKILL.md) |
+| Diagnose and improve a prompt | [`prompt-architect`](skills/prompt-architect/SKILL.md) |
+
+## Installation
+
+### Select skills with the skills CLI
+
+You need Node.js and npm to run the installer:
 
 ```bash
 npx skills@latest add GadDev/skills
 ```
 
-Pick the skills you want and which agents to install them to.
-`ai-release-triage` and `ai-pulse` both call into `evidence-tiering` for
-source credibility checks, so it's worth installing all three together if
-you want either. `prompt-architect` is a separate, standalone skill — no
-dependency on the other three.
+Choose the skills and agent installation targets offered by the CLI.
+Installing these Markdown instructions does not require running `npm install`
+in this repository; its development dependencies support maintenance and releases.
 
-### Install one skill at a time
+List the catalogue without installing:
 
 ```bash
-# See what's available first
 npx skills@latest add GadDev/skills --list
+```
 
-# Install just one
+Install an individual skill:
+
+```bash
 npx skills@latest add GadDev/skills --skill ai-release-triage
 npx skills@latest add GadDev/skills --skill ai-pulse
 npx skills@latest add GadDev/skills --skill evidence-tiering
+npx skills@latest add GadDev/skills --skill brainstorm-to-blueprint
+npx skills@latest add GadDev/skills --skill design-skill
 npx skills@latest add GadDev/skills --skill prompt-architect
 ```
 
-If you install `ai-release-triage` or `ai-pulse` without `evidence-tiering`,
-they still work — each has a fallback rule built in — but the source
-credibility checks are more thorough with `evidence-tiering` installed
-alongside them.
+Each command above selects one skill; run the commands for the skills you want.
 
-### Or install as a Claude Code plugin
-
-Prefer a read-only, managed bundle over editable copies:
+### Install the Claude Code plugin bundle
 
 ```bash
 claude plugin marketplace add GadDev/skills
 claude plugin install gaddev-skills@gaddev
 ```
 
-## Skills
+The plugin bundles the repository's skills. Choose one installation route
+for a given agent to avoid loading duplicate copies.
 
-All five are **model-invoked** — they trigger automatically when the
-conversation calls for them, no slash command needed.
+## Requirements and optional companions
 
-### AI hype-filtering
+| Skill | Optional companion | Inputs and capabilities needed |
+| --- | --- | --- |
+| `ai-release-triage` | `evidence-tiering` | A specific release and adoption context; web search and access to current sources for verification |
+| `ai-pulse` | `evidence-tiering` | A topic or time window; web search and current sources for news and research roundups |
+| `evidence-tiering` | None | Claims and source material; source access when checking beyond the supplied evidence |
+| `brainstorm-to-blueprint` | `evidence-tiering` | Existing brainstorm notes; file access to save artifacts; source access when verifying external claims |
+| `design-skill` | None | A workflow and desired outcome; file access to save the skill and supporting resources |
+| `prompt-architect` | None | The original prompt, intended outcome, and relevant context |
 
-| Skill                                                    | What it's for                                                                                                           |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| [`ai-release-triage`](skills/ai-release-triage/SKILL.md) | Evaluating one specific new model/tool/framework release — is it hype, what actually changed, is it worth adopting      |
-| [`ai-pulse`](skills/ai-pulse/SKILL.md)                   | Broad "what's new in AI" digests and research-paper roundups — multi-item scans, not deep dives                         |
-| [`evidence-tiering`](skills/evidence-tiering/SKILL.md)   | The shared credibility rubric both skills above call into — usable standalone any time an AI claim needs a sanity check |
-| [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | Turning a raw feature brainstorm (e.g. a ChatGPT dump) into a grounded constitution, roadmap, and techstack — without inventing scope or tech you never chose. Feeds Spec Kit / OpenSpec |
-| [`design-skill`](skills/design-skill/SKILL.md) | Designing and authoring a new Claude Code skill — trigger/description design, scope, worked examples, and diagnosing skills that won't fire |
+`ai-release-triage`, `ai-pulse`, and `brainstorm-to-blueprint` all include a
+fallback when `evidence-tiering` is absent. It is an optional companion,
+not a hard installation dependency. In the planning workflow it helps vet
+claims in the notes; it does not select your technology stack for you.
 
-### Prompt engineering
+An installation does not provide the agent with browsing, credentials, or
+other tools. If source access is unavailable, current claims cannot be
+independently verified; distinguish supplied evidence from unresolved claims.
 
-| Skill                                                  | What it's for                                                                                                                                                                                                      |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`prompt-architect`](skills/prompt-architect/SKILL.md) | Diagnosing and rewriting prompts that aren't producing good output — applies system-prompt structure, XML tags, few-shot examples, and output constraints, and refuses to improve adversarial or goal-less prompts |
+### Compatibility and invocation
+
+These skills are written for Claude Code. The skills CLI also supports other
+agent installation targets, but installer support does not establish equivalent
+runtime behaviour. Verify the selected workflow in your agent before relying on it.
+
+The descriptions are written to support automatic selection when a request
+matches the workflow. Selection depends on the agent, model, and available
+context; a matching request does not guarantee the skill was loaded.
+
+After installation:
+
+1. Confirm that your agent lists the selected skill.
+2. Try a usage example below and confirm that the agent loaded the skill.
+3. Check the required tool access and review the actual output.
+
+For loading or explicit invocation, consult your agent's documentation,
+including [Claude Code's skill documentation](https://code.claude.com/docs/en/skills).
+
+## Examples
+
+### AI research
+
+| Skill | What it does |
+| --- | --- |
+| [`ai-release-triage`](skills/ai-release-triage/SKILL.md) | Evaluates one AI model, tool, framework, or coding-agent technique: what changed, how strong the evidence is, and whether adoption makes sense in your context |
+| [`ai-pulse`](skills/ai-pulse/SKILL.md) | Produces multi-item AI news and research roundups with technical depth and source scrutiny |
+| [`evidence-tiering`](skills/evidence-tiering/SKILL.md) | Weighs AI claims by source quality and flags weaknesses before claims are repeated |
+
+### Grounded planning
+
+| Skill | What it does |
+| --- | --- |
+| [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | Structures existing notes into a constitution, roadmap, and techstack; preserves decisions and surfaces assumptions, missing information, and contradictions |
+
+The planning skill includes placement guidance for projects using Spec Kit
+or OpenSpec. It supplies planning artifacts rather than replacing those
+tools' downstream specification and implementation workflows.
+
+### Prompt improvement
+
+| Skill | What it does |
+| --- | --- |
+| [`prompt-architect`](skills/prompt-architect/SKILL.md) | Diagnoses missing context and unclear success conditions, then iteratively revises the prompt with structure, constraints, examples, and grounding guidance |
+
+### Agent skill authoring
+
+| Skill | What it does |
+| --- | --- |
+| [`design-skill`](skills/design-skill/SKILL.md) | Guides skill scope, trigger descriptions, instructions, worked examples, and supporting resources; also helps diagnose loading problems |
+
+`design-skill` concerns agent skill authoring, not UI or graphic design.
 
 ## Usage examples
 
-All skills are model-invoked — just talk naturally and the right one
-fires. These are the phrases that trigger each skill.
+These requests match the intended workflows. Confirm loading when testing;
+they are illustrative inputs, not recorded performance results.
 
-### AI hype-filtering
+### Evaluate a release
 
-```
-"Is the new [model name] release actually good or is it hype?"
-"What actually changed in [release] compared to the previous version?"
-"Should I switch my agent stack to [framework]?"
-"What's new in AI this week?"
-"Any interesting papers on reasoning lately?"
+```text
+Should I adopt [specific AI release] for [my workflow]?
+Compare it with [what I use now], check the evidence, and lead with a verdict.
 ```
 
-The triage skills lead with a verdict, then explain the evidence quality
-behind it. They won't repeat a vendor claim at face value.
+### Get a research or news roundup
 
-### prompt-architect
-
-```
-"Help me write a better prompt for [task]"
-"My prompt keeps giving generic output — what's wrong with it?"
-"Improve this:" [paste prompt]
-"I need a system prompt for an agent that does [X]"
-"How do I stop this from hallucinating?"
+```text
+What changed in AI engineering during [date range]?
+Prioritise architecture, serving efficiency, and agent tooling.
 ```
 
-What you get back: a scored analysis of what's missing, an improved
-prompt with structural techniques applied (XML tags, few-shot examples,
-output constraints, grounding instructions), and a concise explanation
-of each change. If the improved prompt can't be resolved due to an
-ambiguity in your goal, it stops and asks rather than guessing.
+### Check a claim
 
-**Example — before/after**
-
-Before (typical underspecified prompt):
-
-```
-Summarise this contract for me.
+```text
+Check the evidence behind this AI benchmark claim.
+Separate what the supplied sources establish from what remains unverified.
+[paste the claim and sources]
 ```
 
-After (with XML structure, grounding, and output constraints applied):
+### Structure a brainstorm
 
-```xml
-<context>
-You are a legal assistant helping a non-lawyer understand a contract
-before signing. The reader has no legal background.
-</context>
-<task>
-Summarise the attached contract, focusing on obligations, key dates,
-termination conditions, and any clauses that carry significant risk.
-</task>
-<constraints>
-Answer only from the provided contract text. If a topic is not covered,
-say "not addressed in this document." Do not use legal jargon without
-explaining it in plain English immediately after.
-</constraints>
-<output_format>
-Plain English. Use headings: Obligations, Key Dates, Termination,
-Risk Clauses. Maximum 400 words total.
-</output_format>
+```text
+Turn these existing notes into a constitution, roadmap, and techstack.
+Preserve my decisions, flag assumptions, and surface contradictory requirements.
+[paste your brainstorm]
 ```
 
-## Why these are separate skills
+Bring existing source material. This skill structures an idea you have
+already explored; it is not a feature-design workflow starting from nothing.
 
-`evidence-tiering` is the reusable judgment primitive: how to weigh a
-claim by source quality. `ai-release-triage` and `ai-pulse` are two
-different jobs built on top of it — one deep, one broad. Splitting them
-means the credibility logic stays consistent everywhere it's used instead
-of drifting between copies.
+### Improve a prompt
 
-`prompt-architect` solves an unrelated problem (prompt quality, not claim
-credibility) and has no dependency on the other three — install it on its
-own if that's the only thing you need.
+```text
+This prompt keeps producing generic answers. Help me improve it.
+My intended outcome is [outcome].
+[paste the prompt and an example of the problem]
+```
+
+### Author a skill
+
+```text
+Help me design an agent skill for reviewing release notes.
+Its users are [users], its input is [input], and its output should be [output].
+```
+
+## Why the skills are separate
+
+`evidence-tiering` is a shared credibility framework. `ai-release-triage`
+applies it to one release, `ai-pulse` to a broad roundup, and
+`brainstorm-to-blueprint` to claims within planning notes. Their outputs
+and intended triggers differ, so they remain separate workflows.
+
+`prompt-architect` and `design-skill` are standalone: one improves a prompt,
+the other helps author an agent skill. Neither requires the research skills.
+
+## Directory presentation
+
+[Browse GadDev skills on skills.sh](https://skills.sh/gaddev/skills).
+The root `skills.sh.json` groups the directory page by workflow. It changes
+page organisation, not skill installation or ranking.
+
+According to the [official customization documentation](https://skills.sh/docs/customize),
+configuration changes are picked up after a telemetry-enabled CLI installation
+from the default branch, followed by processing and cache refresh. Visiting
+the page alone does not trigger an update.
+
+## Validation and contributions
+
+Run the repository's skill validator before proposing a change:
+
+```bash
+npm run validate
+```
+
+Review prose and examples as well as metadata. Passing a structural validator
+does not establish that a skill triggers correctly or improves task outcomes.
+
+For changes to user-facing skill behaviour, include a changeset:
+
+```bash
+npm run changeset
+```
+
+These skills are meant to be adapted. Useful feedback includes the request,
+agent/model, loaded skill, actual output, expected output, and the correction
+you needed. Remove sensitive material before sharing examples.
 
 ## Release process
 
-Versioning uses [changesets](https://github.com/changesets/changesets). Every
-PR that changes a skill should include a changeset (`npx changeset`)
-describing the change and its version bump (patch/minor/major).
+Versioning uses [Changesets](https://github.com/changesets/changesets).
+PRs that change skills should describe the change and its intended version bump
+in a changeset.
 
-Merging a PR with a changeset doesn't cut a release by itself — it updates
-a running `chore: version skills` PR that accumulates every pending
-changeset. Releases are **batched, not per-fix**: that PR is left open and
-merged deliberately, once enough changes have landed to justify a version
-bump, not automatically after every merge. Merging it bumps the version
-once, writes one `CHANGELOG.md` entry covering everything batched in, and
-tags a GitHub release.
+Merging a changeset updates the running `chore: version skills` PR; it does
+not immediately cut a release. Releases are batched, and the version PR is
+merged deliberately when the accumulated changes justify a release.
 
-There's no fixed cadence — merge the version PR whenever the batch feels
-release-worthy (a handful of related fixes, a new skill, a security fix
-that shouldn't wait). A single urgent fix is a valid reason to merge it
-immediately rather than wait for a batch.
+Merging the version PR bumps the version, updates the changelog, and tags
+a GitHub release through the release workflow. An urgent fix can justify
+releasing a smaller batch.
 
-## Contributing / adapting
-
-These are meant to be hacked on. Fork it, edit the SKILL.md files, make
-them reflect your own judgment calls. If you find a case where a skill
-gave a verdict that didn't hold up, that's the most useful kind of issue
-to open.
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 
-MIT
+[MIT](LICENSE).

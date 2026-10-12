@@ -1,0 +1,26 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Grounded planning",
+      "description": "Turn existing brainstorms into plans that preserve decisions and flag uncertainty.",
+      "skills": ["brainstorm-to-blueprint"]
+    },
+    {
+      "title": "AI research",
+      "description": "Evaluate AI releases, news, research, and the evidence behind their claims.",
+      "skills": ["ai-release-triage", "ai-pulse", "evidence-tiering"]
+    },
+    {
+      "title": "Prompt improvement",
+      "description": "Diagnose weak prompts and clarify context, constraints, and output requirements.",
+      "skills": ["prompt-architect"]
+    },
+    {
+      "title": "Skill authoring",
+      "description": "Design agent skill triggers, workflows, instructions, and supporting examples.",
+      "skills": ["design-skill"]
+    }
+  ]
+}
