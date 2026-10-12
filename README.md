@@ -1,6 +1,10 @@
 # GadDev Agent Skills
 
 [![skills.sh](https://skills.sh/b/gaddev/skills)](https://skills.sh/gaddev/skills)
+[![Validate](https://github.com/GadDev/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/GadDev/skills/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+![Scattered notes examined through a lens and organised into planning documents](docs/assets/agent-skills-banner.png)
 
 Agent skills for evidence-backed AI research, grounded planning, prompt
 improvement, and agent skill authoring. Each skill addresses a specific
@@ -10,7 +14,17 @@ workflow; install the ones you need.
 It turns existing notes into a constitution, roadmap, and techstack while
 preserving stated decisions and flagging assumptions and open choices.
 
-## Choose a skill
+## Contents
+
+- [Skill catalogue](#skill-catalogue)
+- [Installation](#installation)
+- [Examples](#examples)
+- [Requirements and compatibility](#requirements-and-compatibility)
+- [Contributing](#contributing)
+- [Releases](#releases)
+- [License](#license)
+
+## Skill catalogue
 
 | Your task | Start with |
 | --- | --- |
@@ -21,7 +35,7 @@ preserving stated decisions and flagging assumptions and open choices.
 | Design an agent skill or diagnose why it is not loading | [`design-skill`](skills/design-skill/SKILL.md) |
 | Diagnose and improve a prompt | [`prompt-architect`](skills/prompt-architect/SKILL.md) |
 
-## Install
+## Installation
 
 ### Select skills with the skills CLI
 
@@ -103,7 +117,7 @@ After installation:
 For loading or explicit invocation, consult your agent's documentation,
 including [Claude Code's skill documentation](https://code.claude.com/docs/en/skills).
 
-## Skills
+## Examples
 
 ### AI research
 

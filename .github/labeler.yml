@@ -1,0 +1,48 @@
+ci/cd:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'
+          - '.github/dependabot.yml'
+          - '.github/labeler.yml'
+          - '.github/labels.json'
+          - '.github/CODEOWNERS'
+          - '.github/PULL_REQUEST_TEMPLATE.md'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'package-lock.json'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+
+'area: content':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'skills/**'
+          - 'docs/**'
+          - 'README.md'
+
+'area: infrastructure':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+          - 'scripts/**'
+          - 'package.json'
+          - 'package-lock.json'
+
+design:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'skills/**'
+          - 'docs/**'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'scripts/**'
+          - 'package.json'
+          - 'package-lock.json'
