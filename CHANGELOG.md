@@ -1,5 +1,16 @@
 # gaddev-skills
 
+## 1.4.1
+
+### Patch Changes
+
+- [#13](https://github.com/GadDev/skills/pull/13) [`eec9f00`](https://github.com/GadDev/skills/commit/eec9f00419d283b0135c4ad37dca07b211bbe920) Thanks [@GadDev](https://github.com/GadDev)! - Clarify the skill catalogue and installation guidance.
+
+  - Update the README with accurate categories, installation commands, optional companions, and compatibility guidance.
+  - Align package and Claude marketplace descriptions with the full catalogue.
+  - Expand marketplace keywords to cover planning, prompt improvement, and skill authoring.
+  - Add skills.sh page groupings for all six skills.
+
 ## 1.4.0
 
 ### Minor Changes
