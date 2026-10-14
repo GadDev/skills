@@ -16,30 +16,66 @@ preserving stated decisions and flagging assumptions and open choices.
 
 ## Contents
 
+- [Quick start](#quick-start)
 - [Skill catalogue](#skill-catalogue)
 - [Installation](#installation)
-- [Examples](#examples)
 - [Requirements and compatibility](#requirements-and-compatibility)
+- [Usage examples](#usage-examples)
+- [Why the skills are separate](#why-the-skills-are-separate)
+- [Directory presentation](#directory-presentation)
 - [Contributing](#contributing)
-- [Releases](#releases)
+- [Release process](#release-process)
 - [License](#license)
+
+## Quick start
+
+Try the planning workflow with notes you already have:
+
+1. Install the skill and select your agent when prompted:
+
+   ```bash
+   npx skills@latest add GadDev/skills --skill brainstorm-to-blueprint
+   ```
+
+2. Open your agent in the project where you want the planning files. Confirm
+   that `brainstorm-to-blueprint` is available, then paste this request with
+   your notes:
+
+   ```text
+   Turn these existing notes into a constitution, roadmap, and techstack.
+   Preserve my decisions and flag unstated choices as assumptions.
+   [paste your brainstorm]
+   ```
+
+3. Confirm the agent loaded the skill. Review the three artifacts against
+   your notes: stated decisions should be preserved, unstated technology
+   choices tagged, and contradictions surfaced for you to resolve. If a
+   blocking detail is missing, the skill asks before completing the files.
+
+For Claude Code, you can invoke a CLI-installed skill explicitly with
+`/brainstorm-to-blueprint`. If you install the [plugin bundle](#install-the-claude-code-plugin-bundle),
+use `/gaddev-skills:brainstorm-to-blueprint` instead.
+
+These skills are Markdown workflow instructions. Your agent supplies the
+model, tools, and file access used to carry them out.
 
 ## Skill catalogue
 
-| Your task | Start with |
-| --- | --- |
-| Decide whether to adopt a particular AI release | [`ai-release-triage`](skills/ai-release-triage/SKILL.md) |
-| Catch up on AI news or research across several items | [`ai-pulse`](skills/ai-pulse/SKILL.md) |
-| Check the evidence behind an AI claim | [`evidence-tiering`](skills/evidence-tiering/SKILL.md) |
-| Structure an existing brainstorm into planning artifacts | [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) |
-| Design an agent skill or diagnose why it is not loading | [`design-skill`](skills/design-skill/SKILL.md) |
-| Diagnose and improve a prompt | [`prompt-architect`](skills/prompt-architect/SKILL.md) |
+| Your task | Start with | What to expect |
+| --- | --- | --- |
+| Decide whether to adopt a particular AI release | [`ai-release-triage`](skills/ai-release-triage/SKILL.md) | An adoption verdict supported by evidence, workflow fit, and tradeoffs |
+| Catch up on AI news or research across several items | [`ai-pulse`](skills/ai-pulse/SKILL.md) | A concise roundup ordered by technical significance, with evidence notes |
+| Check the evidence behind an AI claim | [`evidence-tiering`](skills/evidence-tiering/SKILL.md) | Credibility and confidence notes attached to claims in your answer |
+| Structure an existing brainstorm into planning artifacts | [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | A constitution, roadmap, and techstack with visible assumptions |
+| Design an agent skill or diagnose why it is not loading | [`design-skill`](skills/design-skill/SKILL.md) | Guidance on scope, triggers, worked examples, and loading problems |
+| Diagnose and improve a prompt | [`prompt-architect`](skills/prompt-architect/SKILL.md) | A revised prompt with an explanation of the changes |
 
 ## Installation
 
 ### Select skills with the skills CLI
 
-You need Node.js and npm to run the installer:
+You need Node.js and npm to run the installer. The
+[skills CLI documentation](https://skills.sh/docs/cli) covers installation options:
 
 ```bash
 npx skills@latest add GadDev/skills
@@ -78,7 +114,9 @@ claude plugin install gaddev-skills@gaddev
 The plugin bundles the repository's skills. Choose one installation route
 for a given agent to avoid loading duplicate copies.
 
-## Requirements and optional companions
+## Requirements and compatibility
+
+### Inputs and optional companions
 
 | Skill | Optional companion | Inputs and capabilities needed |
 | --- | --- | --- |
@@ -117,40 +155,6 @@ After installation:
 For loading or explicit invocation, consult your agent's documentation,
 including [Claude Code's skill documentation](https://code.claude.com/docs/en/skills).
 
-## Examples
-
-### AI research
-
-| Skill | What it does |
-| --- | --- |
-| [`ai-release-triage`](skills/ai-release-triage/SKILL.md) | Evaluates one AI model, tool, framework, or coding-agent technique: what changed, how strong the evidence is, and whether adoption makes sense in your context |
-| [`ai-pulse`](skills/ai-pulse/SKILL.md) | Produces multi-item AI news and research roundups with technical depth and source scrutiny |
-| [`evidence-tiering`](skills/evidence-tiering/SKILL.md) | Weighs AI claims by source quality and flags weaknesses before claims are repeated |
-
-### Grounded planning
-
-| Skill | What it does |
-| --- | --- |
-| [`brainstorm-to-blueprint`](skills/brainstorm-to-blueprint/SKILL.md) | Structures existing notes into a constitution, roadmap, and techstack; preserves decisions and surfaces assumptions, missing information, and contradictions |
-
-The planning skill includes placement guidance for projects using Spec Kit
-or OpenSpec. It supplies planning artifacts rather than replacing those
-tools' downstream specification and implementation workflows.
-
-### Prompt improvement
-
-| Skill | What it does |
-| --- | --- |
-| [`prompt-architect`](skills/prompt-architect/SKILL.md) | Diagnoses missing context and unclear success conditions, then iteratively revises the prompt with structure, constraints, examples, and grounding guidance |
-
-### Agent skill authoring
-
-| Skill | What it does |
-| --- | --- |
-| [`design-skill`](skills/design-skill/SKILL.md) | Guides skill scope, trigger descriptions, instructions, worked examples, and supporting resources; also helps diagnose loading problems |
-
-`design-skill` concerns agent skill authoring, not UI or graphic design.
-
 ## Usage examples
 
 These requests match the intended workflows. Confirm loading when testing;
@@ -188,6 +192,8 @@ Preserve my decisions, flag assumptions, and surface contradictory requirements.
 
 Bring existing source material. This skill structures an idea you have
 already explored; it is not a feature-design workflow starting from nothing.
+It includes placement guidance for Spec Kit and OpenSpec projects, while
+leaving their downstream specification and implementation workflows to those tools.
 
 ### Improve a prompt
 
@@ -203,6 +209,8 @@ My intended outcome is [outcome].
 Help me design an agent skill for reviewing release notes.
 Its users are [users], its input is [input], and its output should be [output].
 ```
+
+`design-skill` concerns agent skill authoring, not UI or graphic design.
 
 ## Why the skills are separate
 
@@ -225,9 +233,10 @@ configuration changes are picked up after a telemetry-enabled CLI installation
 from the default branch, followed by processing and cache refresh. Visiting
 the page alone does not trigger an update.
 
-## Validation and contributions
+## Contributing
 
-Run the repository's skill validator before proposing a change:
+For repository layout and skill conventions, read [AGENTS.md](AGENTS.md).
+Run the dependency-free skill validator from the repository root:
 
 ```bash
 npm run validate
@@ -236,11 +245,16 @@ npm run validate
 Review prose and examples as well as metadata. Passing a structural validator
 does not establish that a skill triggers correctly or improves task outcomes.
 
-For changes to user-facing skill behaviour, include a changeset:
+For changes to user-facing skill behaviour, include a changeset. Install
+maintenance dependencies first if you have not already:
 
 ```bash
+npm ci
 npm run changeset
 ```
+
+Select `gaddev-skills` and the appropriate version bump. Documentation fixes
+can use a patch changeset when they should appear in the release notes.
 
 These skills are meant to be adapted. Useful feedback includes the request,
 agent/model, loaded skill, actual output, expected output, and the correction
@@ -256,9 +270,10 @@ Merging a changeset updates the running `chore: version skills` PR; it does
 not immediately cut a release. Releases are batched, and the version PR is
 merged deliberately when the accumulated changes justify a release.
 
-Merging the version PR bumps the version, updates the changelog, and tags
-a GitHub release through the release workflow. An urgent fix can justify
-releasing a smaller batch.
+Merging the version PR applies the version bump and changelog update. The
+release workflow then runs `changeset tag` to create Git tags; it does not
+create GitHub Release entries or publish an npm package. An urgent fix can
+justify releasing a smaller batch.
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
 
