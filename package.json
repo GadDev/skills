@@ -15,8 +15,8 @@
 		"test:validation": "node --test scripts/validate-skills.test.mjs"
 	},
 	"devDependencies": {
-		"@changesets/changelog-github": "^0.7.0",
-		"@changesets/cli": "^2.30.0",
+		"@changesets/changelog-github": "^1.0.1",
+		"@changesets/cli": "^3.0.3",
 		"yaml": "^2.9.1"
 	},
 	"packageManager": "npm@11.17.0"
