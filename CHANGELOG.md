@@ -1,5 +1,17 @@
 # gaddev-skills
 
+## 1.4.2
+
+### Patch Changes
+
+- [#16](https://github.com/GadDev/skills/pull/16) [`834cbae`](https://github.com/GadDev/skills/commit/834cbae357497615a49775211bc13fe2abdbfa34) Thanks [@GadDev](https://github.com/GadDev)! - Improve README navigation and first-use guidance.
+
+  - Repair contents links and consolidate repeated skill descriptions into the catalogue.
+  - Add a planning quick start, expected outputs, and Claude Code invocation examples.
+  - Clarify contributor prerequisites and the tag-only release workflow.
+
+- [#18](https://github.com/GadDev/skills/pull/18) [`6723a2c`](https://github.com/GadDev/skills/commit/6723a2c50bf6220fa42d5cd9b129e5ff61cd9d17) Thanks [@GadDev](https://github.com/GadDev)! - Add a recorded brainstorm-to-blueprint demonstration with original input and output, reproduction guidance, provenance limitations, and a review of preserved decisions and assumption drift.
+
 ## 1.4.1
 
 ### Patch Changes
