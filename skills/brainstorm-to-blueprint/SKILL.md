@@ -35,8 +35,16 @@ first rather than generating one.
 
 Read the dump and pull out only what's actually stated: the problem, the
 users, explicit requirements, any named constraints, and any technology the
-user themselves named. Keep a mental (or literal) line between **stated**
-and **not stated**. Do not start drafting artifacts yet.
+user themselves named. Classify each substantive item before drafting:
+
+- **Stated decision/constraint** — preserve its wording and strength.
+- **Open choice** — use `[OPEN]`; an undecided choice is not an assumption.
+- **Contradiction** — quote both statements; do not resolve either silently.
+- **Added inference/recommendation** — use `[ASSUMPTION — confirm]`.
+
+Carry the same status across all three documents. A suggestion is not a
+selection; “not committed” is not an explicit exclusion. Do not start drafting
+artifacts yet.
 
 ### 2. Vet the dump — it came from an LLM
 
@@ -46,8 +54,11 @@ number, a "standard" architecture). Treat it as a **source to vet, not
 ground truth**. Apply the `evidence-tiering` skill to any factual or
 comparative claim before promoting it into an artifact; if that skill isn't
 installed, fall back to: a claim with no cited primary source is an
-assumption, not a fact. Strip or tag anything that's hype rather than a
-decision the user made.
+assumption, not a fact. Apply the same rule to factual claims you add, including technology
+trade-offs. Cite a primary source actually checked, or mark the individual
+claim `[ASSUMPTION — confirm]` and unverified. A blanket disclaimer does not
+make unsupported comparisons grounded. If verification is unavailable, keep
+options open and omit unnecessary comparative claims.
 
 ### 3. One batched gap pass — then stop asking
 
@@ -55,8 +66,10 @@ Identify only the gaps that genuinely block one of the three artifacts
 (e.g. no target platform → can't write a techstack; no ordering signal →
 can't sequence a roadmap). Ask them **all at once, in a single batch**, not
 one at a time. Do not interview the user from zero — they already ideated;
-only fill blocking holes. If a gap isn't blocking, leave it as a flagged
-assumption instead of asking.
+only fill blocking holes. If an unresolved choice can be represented as `[OPEN]` without fabricating
+content, it does not block writing. Preserve nonblocking questions in an
+“Open decisions” list; do not start another interview after delivery. Keep
+added inferences in “Assumptions to confirm,” separate from open decisions.
 
 ### 4. Emit the three artifacts
 
@@ -75,16 +88,28 @@ Write each with every line traceable to the dump or explicitly tagged:
   silently: an unstated choice is `[ASSUMPTION — confirm]`, and a genuinely
   open choice is listed as options with trade-offs, not a fabricated pick.
 
-### 5. Anti-hallucination convention (mechanical, not vibes)
+### 5. Check consistency before saving
 
-- Every line either traces to the dump or carries a visible
-  `[ASSUMPTION — confirm]` tag. Nothing invented silently.
-- Techstack picks the user didn't name are **always** tagged — this is where
-  fabrication happens most.
-- End with a short **"Assumptions to confirm"** list collecting every tagged
-  item, so the user can accept or correct them in one pass.
-- If the dump genuinely doesn't support one of the three artifacts, say so
-  and ask — don't manufacture it to complete the set.
+Review the three artifacts together against the source:
+
+- Trace substantive requirements to a source statement or an explicit
+  `[ASSUMPTION — confirm]` tag. Do not relabel stated decisions as assumptions.
+- Never promote a tagged assumption into “must,” a selected technology, or a
+  committed milestone elsewhere. Repeat its tag wherever it affects a plan.
+- Separate a required outcome from its mechanism. “Delete data after 30 days”
+  does not decide automatic deletion, a scheduler, or a particular service.
+- Preserve stated sequencing. If requirement placement in the pilot is unknown,
+  record one `[OPEN]` placement decision rather than assigning it to several
+  phases or silently postponing it. Any recommended gate is an added assumption.
+- List technology alternatives as options, not selections. Tag unchosen proposed
+  picks and ground their factual trade-offs as described above. One resolved
+  choice may inform others; do not claim it uniquely determines the stack.
+- Collect every added assumption under “Assumptions to confirm” and every
+  unresolved choice/contradiction under “Open decisions.” Use “None” if empty.
+- Check quotes and any source locations. Do not invent line references.
+
+If the source genuinely cannot support one artifact even with open choices,
+ask the single batch of blocking questions instead of manufacturing it.
 
 ## Output location
 
