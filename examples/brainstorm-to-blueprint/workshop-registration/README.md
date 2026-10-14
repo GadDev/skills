@@ -50,3 +50,9 @@ or implementing the workshop application.
 See the [separate Codex rerun and comparison](reruns/codex-2026-10-14/README.md).
 It uses the same input with revised instructions, preserves new outputs, and
 explains why it is not a controlled Sonnet before/after comparison.
+
+## Claude rerun
+
+Read the [Claude rerun and review](reruns/claude-2026-10-14/README.md).
+It preserves the supplied files, records provenance gaps, and identifies both
+improvements and remaining scope drift.
