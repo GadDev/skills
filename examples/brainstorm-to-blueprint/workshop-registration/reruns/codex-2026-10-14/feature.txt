@@ -1,0 +1,25 @@
+We organise monthly engineering workshops and currently handle registrations
+through messages and a spreadsheet. People sometimes register twice, and
+organisers lose track of available places.
+
+We already have a React + TypeScript website. Keep that frontend.
+
+For V1:
+- Participants can see upcoming workshops and register.
+- Each workshop has a capacity set by the organiser.
+- Prevent duplicate registrations for the same email and workshop.
+- Organisers can view registrations and export them as CSV.
+- Collect only name and email.
+- Registration data must be deleted 30 days after the workshop.
+- One maintainer, roughly two weekends to build the pilot.
+- First prove registration and capacity handling with one workshop.
+  Add organiser export after that.
+- Payments and calendar integrations are outside V1.
+
+We haven't chosen a backend or database. Someone suggested Firebase,
+but that isn't a decision.
+
+Participants shouldn't need an account.
+Also, only authenticated employees should be allowed to register.
+
+Waitlists could be useful later, but we haven't committed to them.

@@ -44,3 +44,9 @@ particular, automatic deletion becomes a requirement without user approval.
 Do not run over this example's recorded output. The unresolved identity choice
 is intentional: reproducing the example does not require choosing a backend
 or implementing the workshop application.
+
+## Revised-skill run
+
+See the [separate Codex rerun and comparison](reruns/codex-2026-10-14/README.md).
+It uses the same input with revised instructions, preserves new outputs, and
+explains why it is not a controlled Sonnet before/after comparison.
