@@ -255,6 +255,8 @@ Markdown parser or the upstream Claude plugin schema validator.
 Review prose and examples as well as metadata. Passing a structural validator
 does not establish that a skill triggers correctly or improves task outcomes.
 
+Maintenance tooling requires Node.js 22.11+ (22.x), 24.x, or 26+, and npm 10.9+.
+
 For changes to user-facing skill behaviour, include a changeset. Install
 maintenance dependencies first if you have not already:
 
