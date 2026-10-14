@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.7
+
+### Patch Changes
+
+- [#27](https://github.com/GadDev/skills/pull/27) [`f87330e`](https://github.com/GadDev/skills/commit/f87330edaf76c9500141bc77dbabc8835e2c8a30) Thanks [@GadDev](https://github.com/GadDev)! - Preserve scope status in blueprint headings, tag inferred prerequisites and milestone assignments, and require complete open-decision and assumption lists at the end of each artifact.
+
 ## 1.4.6
 
 ### Patch Changes
