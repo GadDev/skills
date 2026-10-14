@@ -98,14 +98,25 @@ Review the three artifacts together against the source:
   committed milestone elsewhere. Repeat its tag wherever it affects a plan.
 - Separate a required outcome from its mechanism. “Delete data after 30 days”
   does not decide automatic deletion, a scheduler, or a particular service.
-- Preserve stated sequencing. If requirement placement in the pilot is unknown,
-  record one `[OPEN]` placement decision rather than assigning it to several
-  phases or silently postponing it. Any recommended gate is an added assumption.
+- Check headings and table columns as well as bullet wording: placement under
+  “Not in V1” excludes an item even if its bullet says “not committed.” Put
+  uncommitted ideas under “Open decisions,” never under committed scope or
+  exclusions unless the source explicitly assigns that status.
+- Preserve stated sequencing at the individual requirement level. A stated
+  order for export does not also sequence viewing or related features. Tag
+  each added prerequisite, recommended gate, or milestone assignment
+  `[ASSUMPTION — confirm]` where proposed; if no proposal is needed, leave its
+  placement `[OPEN]`. Do not present inferred dependencies as the user's order.
 - List technology alternatives as options, not selections. Tag unchosen proposed
   picks and ground their factual trade-offs as described above. One resolved
   choice may inform others; do not claim it uniquely determines the stack.
-- Collect every added assumption under “Assumptions to confirm” and every
-  unresolved choice/contradiction under “Open decisions.” Use “None” if empty.
+- End **each artifact** with “Open decisions” followed by “Assumptions to
+  confirm.” Before saving, scan that artifact's body, headings, and tables:
+  collect every unresolved choice/contradiction and every added assumption
+  (including prerequisites and proposed milestone placements) in its ending
+  lists. Use “None” only when that artifact actually contains no such items.
+  Keep status consistent wherever an item is used across documents; a list
+  in one artifact does not replace the ending lists in the other two.
 - Check quotes and any source locations. Do not invent line references.
 
 If the source genuinely cannot support one artifact even with open choices,
