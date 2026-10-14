@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.6
+
+### Patch Changes
+
+- [#25](https://github.com/GadDev/skills/pull/25) [`13234da`](https://github.com/GadDev/skills/commit/13234daacafebd244950e643fc7e821a29cf7b02) Thanks [@GadDev](https://github.com/GadDev)! - Document the Claude workshop rerun with preserved outputs, provenance limitations, and a comparison identifying improved retention handling and remaining scope drift.
+
 ## 1.4.5
 
 ### Patch Changes
