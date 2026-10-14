@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.4
+
+### Patch Changes
+
+- [#21](https://github.com/GadDev/skills/pull/21) [`dbfe5f3`](https://github.com/GadDev/skills/commit/dbfe5f36b228fb07611c7c3c2645f64a88742b61) Thanks [@GadDev](https://github.com/GadDev)! - Upgrade Changesets tooling to remove the vulnerable transitive sprintf-js dependency (GHSA-hp3w-g68c-fv3c).
+
 ## 1.4.3
 
 ### Patch Changes
