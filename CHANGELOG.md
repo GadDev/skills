@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.5
+
+### Patch Changes
+
+- [#23](https://github.com/GadDev/skills/pull/23) [`ae53700`](https://github.com/GadDev/skills/commit/ae53700200c33b3f03254ed6be650de172912b54) Thanks [@GadDev](https://github.com/GadDev)! - Keep brainstorm decisions, open choices, and added assumptions distinct across all three planning artifacts. Ground added trade-offs and prevent retention mechanisms or uncommitted scope from becoming silent requirements.
+
 ## 1.4.4
 
 ### Patch Changes
