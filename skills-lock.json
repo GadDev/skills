@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "brainstorm-to-blueprint": {
+      "source": "GadDev/skills",
+      "sourceType": "github",
+      "skillPath": "skills/brainstorm-to-blueprint/SKILL.md",
+      "computedHash": "d0982f239addf75336f4715986093296311291157b5fd02403cdf17b65a14b84"
+    }
+  }
+}
