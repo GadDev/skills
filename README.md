@@ -238,11 +238,19 @@ the page alone does not trigger an update.
 ## Contributing
 
 For repository layout and skill conventions, read [AGENTS.md](AGENTS.md).
-Run the dependency-free skill validator from the repository root:
+Install maintenance dependencies and run validation from the repository root:
 
 ```bash
+npm ci
+npm run test:validation
 npm run validate
 ```
+
+Validation checks YAML syntax and required metadata, skill bodies, local Markdown
+link destinations, and the repository’s local-source plugin marketplace. It
+checks optional plugin manifest names against their marketplace entries.
+It skips code examples, external URLs, and heading anchors; it is not a full
+Markdown parser or the upstream Claude plugin schema validator.
 
 Review prose and examples as well as metadata. Passing a structural validator
 does not establish that a skill triggers correctly or improves task outcomes.
