@@ -59,6 +59,8 @@ use `/gaddev-skills:brainstorm-to-blueprint` instead.
 These skills are Markdown workflow instructions. Your agent supplies the
 model, tools, and file access used to carry them out.
 
+Try the [recorded workshop-registration demonstration](examples/brainstorm-to-blueprint/workshop-registration/README.md): original notes, three untouched outputs, reproduction steps, and an honest review of the remaining issues.
+
 ## Skill catalogue
 
 | Your task | Start with | What to expect |

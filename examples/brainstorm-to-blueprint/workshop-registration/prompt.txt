@@ -1,0 +1,6 @@
+Use brainstorm-to-blueprint to structure the attached brainstorm into
+constitution.md, roadmap.md, and techstack.md.
+
+Preserve stated decisions, flag assumptions, and surface contradictions.
+Ask one batch of questions only if something blocks the artifacts.
+Save the files in output/.
