@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.3
+
+### Patch Changes
+
+- [#19](https://github.com/GadDev/skills/pull/19) [`da61fa4`](https://github.com/GadDev/skills/commit/da61fa4edec4e00d61977c17877be77da3161c61) Thanks [@GadDev](https://github.com/GadDev)! - Strengthen repository validation for YAML metadata, local Markdown references, and local-source plugin manifests, with regression tests and CI coverage.
+
 ## 1.4.2
 
 ### Patch Changes
