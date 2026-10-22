@@ -8,7 +8,7 @@ edits are mostly writing, not programming.
 
 ```
 skills/<name>/SKILL.md    # one skill per folder; folder name == frontmatter name
-scripts/validate-skills.mjs   # metadata, local references, plugin checks
+scripts/validate-skills.ts   # metadata, local references, plugin checks
 .claude-plugin/marketplace.json   # Claude Code plugin install path
 .changeset/               # versioning (changesets)
 ```
@@ -41,7 +41,7 @@ Guidelines these skills follow — keep them consistent:
 
 ## Before committing
 
-- `npm ci`, then `npm run test:validation` and `npm run validate` — test the
+- `npm ci`, then `npm run typecheck`, `npm run test:validation` and `npm run validate` — test the
   validator and check YAML metadata, local Markdown destinations, and plugin
   manifests. CI runs the same checks on push/PR.
 - Add a changeset (`npm run changeset`) for any user-facing skill change so

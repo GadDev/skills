@@ -11,13 +11,18 @@
 	"scripts": {
 		"changeset": "changeset",
 		"version": "changeset version",
-		"validate": "node scripts/validate-skills.mjs",
-		"test:validation": "node --test scripts/validate-skills.test.mjs"
+		"validate": "node --import tsx scripts/validate-skills.ts",
+		"test:validation": "node --import tsx --test scripts/validate-skills.test.ts",
+		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^1.0.1",
 		"@changesets/cli": "^3.0.3",
+		"@types/node": "^22.20.5",
+		"tsx": "^4.23.15",
+		"typescript": "^7.0.2",
 		"yaml": "^2.9.1"
 	},
-	"packageManager": "npm@11.17.0"
+	"packageManager": "npm@11.17.0",
+	"type": "module"
 }
