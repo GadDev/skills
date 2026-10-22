@@ -1,14 +1,14 @@
-import { test } from 'node:test';
+import { test, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { validate } from './validate-skills.mjs';
+import { validate } from './validate-skills.ts';
 
-function fixture(t) {
+function fixture(t: TestContext) {
   const root = mkdtempSync(resolve(tmpdir(), 'skills-validation-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const write = (file, text) => { mkdirSync(resolve(root, file, '..'), { recursive: true }); writeFileSync(resolve(root, file), text); };
+  const write = (file: string, text: string) => { mkdirSync(resolve(root, file, '..'), { recursive: true }); writeFileSync(resolve(root, file), text); };
   write('skills/demo/SKILL.md', '---\nname: demo\ndescription: |\n  A multiline description.\n---\n# Demo\n');
   write('.claude-plugin/marketplace.json', JSON.stringify({ name: 'market', owner: { name: 'Owner' }, plugins: [{ name: 'bundle', description: 'Bundle', source: './' }] }));
   return { root, write, errors: () => validate(root).errors };

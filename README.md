@@ -242,9 +242,13 @@ Install maintenance dependencies and run validation from the repository root:
 
 ```bash
 npm ci
+npm run typecheck
 npm run test:validation
 npm run validate
 ```
+
+Maintenance scripts and their tests use TypeScript with strict type checking.
+`tsx` runs them directly without a build step; CI checks types before running tests.
 
 Validation checks YAML syntax and required metadata, skill bodies, local Markdown
 link destinations, and the repository’s local-source plugin marketplace. It

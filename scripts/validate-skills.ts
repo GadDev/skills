@@ -5,15 +5,18 @@ import { fileURLToPath } from 'node:url';
 import { parseDocument } from 'yaml';
 
 const defaultRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const text = value => typeof value === 'string' && value.trim().length > 0;
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === 'object' && !Array.isArray(value);
 
-export function validate(root = defaultRoot) {
+const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const text = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
+
+export function validate(root = defaultRoot): { errors: string[]; count: number } {
   root = realpathSync(root);
-  const errors = [];
-  const fail = (file, message) => errors.push(`${file}: ${message}`);
-  const inside = path => { const r = relative(root, path); return r !== '..' && !r.startsWith(`..${sep}`) && !r.startsWith(sep); };
-  function local(file, target, directory = false) {
+  const errors: string[] = [];
+  const fail = (file: string, message: string) => errors.push(`${file}: ${message}`);
+  const inside = (path: string) => { const r = relative(root, path); return r !== '..' && !r.startsWith(`..${sep}`) && !r.startsWith(sep); };
+  function local(file: string, target: string, directory = false) {
     let path;
     try { path = resolve(dirname(resolve(root, file)), decodeURIComponent(target)); }
     catch { fail(file, `invalid local reference ${target}`); return; }
@@ -23,9 +26,9 @@ export function validate(root = defaultRoot) {
     if (!existsSync(path)) fail(file, `missing local reference: ${target}`);
     else if (directory && !statSync(path).isDirectory()) fail(file, `expected directory: ${target}`);
   }
-  function json(file) {
-    try { return JSON.parse(readFileSync(resolve(root, file), 'utf8')); }
-    catch (e) { fail(file, `cannot parse JSON: ${e.message}`); return null; }
+  function json(file: string): Record<string, unknown> | null {
+    try { return JSON.parse(readFileSync(resolve(root, file), 'utf8')) as Record<string, unknown>; }
+    catch (e) { fail(file, `cannot parse JSON: ${e instanceof Error ? e.message : String(e)}`); return null; }
   }
   const skills = resolve(root, 'skills');
   const folders = existsSync(skills) ? readdirSync(skills).filter(n => statSync(resolve(skills, n)).isDirectory()) : [];
@@ -38,15 +41,15 @@ export function validate(root = defaultRoot) {
     if (!match) { fail(file, 'missing frontmatter'); continue; }
     const doc = parseDocument(match[1], { uniqueKeys: true });
     if (doc.errors.length) { fail(file, `invalid YAML: ${doc.errors.map(e => e.message).join('; ')}`); continue; }
-    const data = doc.toJS();
-    if (!data || typeof data !== 'object' || Array.isArray(data)) { fail(file, 'frontmatter must be a mapping'); continue; }
+    const data: unknown = doc.toJS();
+    if (!isRecord(data)) { fail(file, 'frontmatter must be a mapping'); continue; }
     if (!text(data.name) || !slug.test(data.name) || data.name.length > 64) fail(file, 'name must be a lowercase kebab-case string of at most 64 characters');
     if (data.name !== folder) fail(file, 'name does not match folder');
     if (!text(data.description) || data.description.length > 1024) fail(file, 'description must be a nonempty string of at most 1024 characters');
     if (!src.slice(match[0].length).trim()) fail(file, 'empty skill body');
   }
   // Markdown destinations only: ignore code examples, external URLs and fragments.
-  function walk(dir) {
+  function walk(dir: string) {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       if (['.git', 'node_modules'].includes(entry.name) || entry.isSymbolicLink()) continue;
       const path = resolve(dir, entry.name);
@@ -70,11 +73,11 @@ export function validate(root = defaultRoot) {
   const market = json(file);
   if (market) {
     if (!text(market.name) || !slug.test(market.name)) fail(file, 'invalid marketplace name');
-    if (!text(market.owner?.name)) fail(file, 'owner.name is required');
+    if (!text((isRecord(market.owner) ? market.owner.name : undefined))) fail(file, 'owner.name is required');
     if (!Array.isArray(market.plugins) || !market.plugins.length) fail(file, 'plugins must be a nonempty array');
-    const names = new Set();
+    const names = new Set<string>();
     for (const plugin of Array.isArray(market.plugins) ? market.plugins : []) {
-      if (!plugin || !text(plugin.name) || !slug.test(plugin.name)) { fail(file, 'invalid plugin name'); continue; }
+      if (!isRecord(plugin) || !text(plugin.name) || !slug.test(plugin.name)) { fail(file, 'invalid plugin name'); continue; }
       if (names.has(plugin.name)) fail(file, `duplicate plugin name: ${plugin.name}`);
       names.add(plugin.name);
       if (!text(plugin.description)) fail(file, `${plugin.name}: description is required`);
