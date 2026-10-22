@@ -1,5 +1,11 @@
 # gaddev-skills
 
+## 1.4.8
+
+### Patch Changes
+
+- [#29](https://github.com/GadDev/skills/pull/29) [`8c164b3`](https://github.com/GadDev/skills/commit/8c164b37a04d2c79c0508b6aef703b91a252cdb8) Thanks [@GadDev](https://github.com/GadDev)! - Migrate the repository validator and its tests to TypeScript, add strict type checking to CI, and run maintenance scripts directly with tsx.
+
 ## 1.4.7
 
 ### Patch Changes
