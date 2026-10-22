@@ -1,6 +1,6 @@
 {
 	"name": "gaddev-skills",
-	"version": "1.4.7",
+	"version": "1.4.8",
 	"private": true,
 	"description": "Agent skills for evidence-backed AI research, grounded planning, prompt improvement, and agent skill authoring",
 	"repository": {
